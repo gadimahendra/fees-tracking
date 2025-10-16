@@ -35,7 +35,6 @@ The project is built using **Angular 19**, **NGXS**, **PrimeNG**, and **Tailwind
 
 4. **Responsive Layout**
    - Uses **Tailwind CSS grid system**.
-   - Sidebar (Dashboard) stays fixed; content area scrolls independently.
    - PrimeNG tables and dialogs are responsive on different screen sizes.
 
 ---
