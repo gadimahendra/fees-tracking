@@ -1,0 +1,133 @@
+<div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+        <i class="pi pi-users text-blue-600 text-2xl"></i>
+        New Enrollment
+    </h2>
+    <button type="button" (click)="onClose()" class="text-gray-500 hover:text-red-500 transition-colors"
+        pTooltip="Close">
+        <i class="pi pi-times text-xl"></i>
+    </button>
+</div>
+
+<form [formGroup]="enrollForm" class="flex flex-col gap-3 p-2">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <!-- Student Name -->
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">Student Name</label>
+            <input pInputText formControlName="studentName" class="w-full" placeholder="Enter student name"
+                [ngClass]="{ 'p-invalid': isInvalid('studentName') }" />
+            <small *ngIf="isInvalid('studentName')" class="text-red-500 text-xs">
+                Student name is required
+            </small>
+        </div>
+
+        <!-- Contact No -->
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">Contact No</label>
+            <input pInputText formControlName="contactNo" class="w-full" placeholder="Enter contact number"
+                [ngClass]="{ 'p-invalid': isInvalid('contactNo') }" />
+            <ng-container *ngIf="enrollForm.get('contactNo')?.touched">
+                <small *ngIf="enrollForm.get('contactNo')?.hasError('required'); else minlengthError"
+                    class="text-red-500 text-xs">
+                    Contact number is required
+                </small>
+
+                <ng-template #minlengthError>
+                    <small *ngIf="enrollForm.get('contactNo')?.hasError('minlength')" class="text-red-500 text-xs">
+                        Contact number must be 10 digits
+                    </small>
+                </ng-template>
+            </ng-container>
+
+        </div>
+
+        <!-- Total Fees -->
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">Total Fees</label>
+            <input pInputText type="number" formControlName="totalFees" class="w-full"
+                [ngClass]="{ 'p-invalid': isInvalid('totalFees') }" />
+            <ng-container *ngIf="enrollForm.get('totalFees')?.touched">
+                <small *ngIf="enrollForm.get('totalFees')?.hasError('required'); else minAmtError"
+                    class="text-red-500 text-xs">
+                    Total Fees is required
+                </small>
+
+                <ng-template #minAmtError>
+                    <small *ngIf="enrollForm.get('totalFees')?.hasError('min')" class="text-red-500 text-xs">
+                        Total price must be grater than 0
+                    </small>
+                </ng-template>
+            </ng-container>
+        </div>
+
+        <!-- Batch ID -->
+        <div>
+            <!-- <label class="block text-gray-700 text-sm font-medium mb-1">Batch ID</label>
+            <input pInputText type="number" formControlName="batchId" class="w-full"
+                [ngClass]="{ 'p-invalid': isInvalid('batchId') }" />
+            <small *ngIf="isInvalid('batchId')" class="text-red-500 text-xs">
+                Batch ID is required
+            </small> -->
+            <div>
+                <label class="block text-gray-700 text-sm font-medium mb-1">Batch ID</label>
+                <p-dropdown formControlName="batchId" [options]="batches$ | async" optionLabel="batchName"
+                    optionValue="batchId" placeholder="Select status" class="w-full"
+                    [ngClass]="{ 'p-invalid': isInvalid('batchId') }"></p-dropdown>
+                <small *ngIf="isInvalid('batchId')" class="text-red-500 text-xs">
+                    Please select a Batch ID
+                </small>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- EMI Section -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">EMI 1</label>
+            <input pInputText type="number" formControlName="emi1" class="w-full"
+                [ngClass]="{ 'p-invalid': isInvalid('emi1') }" />
+            <small *ngIf="isInvalid('emi1')" class="text-red-500 text-xs">EMI 1 required</small>
+        </div>
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">EMI 2</label>
+            <input pInputText type="number" formControlName="emi2" class="w-full"
+                [ngClass]="{ 'p-invalid': isInvalid('emi2') }" />
+            <small *ngIf="isInvalid('emi2')" class="text-red-500 text-xs">EMI 2 required</small>
+        </div>
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">EMI 3</label>
+            <input pInputText type="number" formControlName="emi3" class="w-full"
+                [ngClass]="{ 'p-invalid': isInvalid('emi3') }" />
+            <small *ngIf="isInvalid('emi3')" class="text-red-500 text-xs">EMI 3 required</small>
+        </div>
+    </div>
+
+    <!-- Total Received -->
+    <div>
+        <label class="block text-gray-700 text-sm font-medium mb-1">Total Received</label>
+        <input pInputText type="number" formControlName="totalReceived" class="w-full"
+            [ngClass]="{ 'p-invalid': isInvalid('totalReceived') }" />
+        <small *ngIf="isInvalid('totalReceived')" class="text-red-500 text-xs">
+            Total received amount is required
+        </small>
+    </div>
+
+    <!-- Status -->
+    <div>
+        <label class="block text-gray-700 text-sm font-medium mb-1">Status</label>
+        <p-dropdown formControlName="status" [options]="statusOptions" optionLabel="label" optionValue="value"
+            placeholder="Select status" class="w-full" [ngClass]="{ 'p-invalid': isInvalid('status') }"></p-dropdown>
+        <small *ngIf="isInvalid('status')" class="text-red-500 text-xs">
+            Please select a status
+        </small>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-end gap-2 mt-4">
+        <p-button label="Cancel" icon="pi pi-times" class="p-button-text" (onClick)="showDialog = false"></p-button>
+        <p-button label="Save" icon="pi pi-check" (onClick)="onSubmit()" [disabled]="enrollForm.invalid"></p-button>
+    </div>
+</form>
+
+<p-toast position="top-right" [baseZIndex]="12000"></p-toast>

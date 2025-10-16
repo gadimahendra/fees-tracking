@@ -1,0 +1,50 @@
+<div class="px-4 py-2 flex flex-col ">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <p-card class="rounded-2xl shadow-md">
+            <ng-template pTemplate="title">Total Students</ng-template>
+            <ng-template pTemplate="content">
+                <div class="text-3xl font-bold">{{ totalStudents }}</div>
+                <div class="text-gray-500 text-sm">Active / Registered</div>
+            </ng-template>
+        </p-card>
+
+
+        <p-card class="rounded-2xl shadow-md">
+            <ng-template pTemplate="title">Total Departments</ng-template>
+            <ng-template pTemplate="content">
+                <div class="text-3xl font-bold">{{ totalDepartments }}</div>
+                <div class="text-gray-500 text-sm">Academic Units</div>
+            </ng-template>
+        </p-card>
+
+
+        <p-card class="rounded-2xl shadow-md">
+            <ng-template pTemplate="title">Fully Paid</ng-template>
+            <ng-template pTemplate="content">
+                <div class="text-3xl font-bold text-green-600">{{ fullyPaid }}</div>
+                <div class="text-gray-500 text-sm">Tuition cleared</div>
+            </ng-template>
+        </p-card>
+
+
+        <p-card class="rounded-2xl shadow-md">
+            <ng-template pTemplate="title">Partially Paid</ng-template>
+            <ng-template pTemplate="content">
+                <div class="text-3xl font-bold text-yellow-500">{{ partiallyPaid }}</div>
+                <div class="text-gray-500 text-sm">Pending balances</div>
+            </ng-template>
+        </p-card>
+    </div>
+
+
+    <!-- <div class="w-full lg:w-3/4 mx-auto">
+        <p-card class="rounded-2xl shadow-md">
+            <ng-template pTemplate="title">Payments Overview</ng-template>
+            <ng-template pTemplate="content">
+                <div class="h-64">
+                    <p-chart type="bar" [data]="paymentChartData" [options]="paymentChartOptions"></p-chart>
+                </div>
+            </ng-template>
+        </p-card>
+    </div> -->
+</div>

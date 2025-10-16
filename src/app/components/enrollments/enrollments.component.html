@@ -1,0 +1,89 @@
+<div class="px-4 py-2">
+    <div class="p-4 bg-white rounded-2xl shadow-md">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2 sm:gap-0">
+            <!-- Title -->
+            <h2 class="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                <i class="pi pi-users text-blue-600 text-2xl sm:text-3xl"></i>
+                Enrollment List
+            </h2>
+
+            <!-- New Enrollment Button -->
+            <div class="self-start sm:self-auto">
+                <p-button (onClick)="onAddEnrollment()" class="w-full sm:w-auto">
+                    <i class="pi pi-plus mr-2"></i>
+                    New Enrollment
+                </p-button>
+            </div>
+        </div>
+
+
+        <p-table [value]="enrollments$ | async" class="text-sm mt-3">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="studentName">
+                        Student Name
+                        <p-sortIcon field="studentName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="batchName">
+                        Batch
+                        <p-sortIcon field="batchName"></p-sortIcon>
+                    </th>
+                    <th>EMIs</th>
+                    <th>Total Fees</th>
+                    <th>Total Received</th>
+                    <th>Status</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-enroll>
+                <tr>
+                    <td>
+                        <span class="font-semibold text-gray-800">{{ enroll.studentName }}</span>
+                        <span class="flex items-center text-gray-600">
+                            <i class="pi pi-phone text-blue-500 mr-2"></i>
+                            {{ enroll.contactNo }}
+                        </span>
+                    </td>
+                    <td>{{ enroll.batchName }}</td>
+                    <td>
+                        <div>
+                            <div class="flex items-center gap-2 text-gray-700">
+                                <span class="font-semibold text-gray-600">EMI 1:</span>
+                                <span>{{ enroll.emi1 | currency:'INR' }}</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700">
+                                <span class="font-semibold text-gray-600">EMI 2:</span>
+                                <span>{{ enroll.emi2 | currency:'INR' }}</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700">
+                                <span class="font-semibold text-gray-600">EMI 3:</span>
+                                <span>{{ enroll.emi3 | currency:'INR' }}</span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>{{ enroll.totalFees | currency:'INR' }}</td>
+                    <td>{{ enroll.totalReceived | currency:'INR' }}</td>
+                    <td>
+                        <span class="px-3 py-1 rounded-full text-white text-xs font-semibold" [ngClass]="{
+              'bg-green-500': enroll.status === 'Full Paid',
+              'bg-yellow-500': enroll.status === 'Partial Paid',
+              'bg-red-500': enroll.status === 'Pending'
+            }">
+                            {{ enroll.status }}
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6" class="text-center text-gray-500 p-4">
+                        No enrollments found.
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<p-toast position="top-right" [baseZIndex]="12000"></p-toast>
