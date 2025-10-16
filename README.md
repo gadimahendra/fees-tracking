@@ -52,11 +52,3 @@ The project is built using **Angular 19**, **NGXS**, **PrimeNG**, and **Tailwind
 | Build & Dev      | Angular CLI, TypeScript, PostCSS |
 
 ---
-
-## ⚡ Project Setup
-
-### Install dependencies
-
-```bash
-npm install
-```
