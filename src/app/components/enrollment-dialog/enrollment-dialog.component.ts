@@ -62,7 +62,7 @@ export class EnrollmentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.createEnrollemntForm();
-    this.store.dispatch(new GetBatches());
+
     this.batches$ = this.store.select(BatchesState.getBatchesState);
   }
 

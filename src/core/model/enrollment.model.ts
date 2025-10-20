@@ -25,3 +25,9 @@ export interface IpostEnrollemt {
   isSoftDelete: false;
   batchId: number;
 }
+
+export interface IEnrollmentFilter {
+  batchid?: 0;
+  status?: string;
+  studentName?: string;
+}

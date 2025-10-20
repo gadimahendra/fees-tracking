@@ -1,13 +1,11 @@
 <div class="px-4 py-2">
-    <div class="p-4 bg-white rounded-2xl shadow-md">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2 sm:gap-0">
-            <!-- Title -->
-            <h2 class="text-xl sm:text-2xl font-bold flex items-center gap-2">
-                <i class="pi pi-users text-blue-600 text-2xl sm:text-3xl"></i>
-                Enrollment List
-            </h2>
 
-            <!-- New Enrollment Button -->
+    <div class="p-4 bg-white rounded-2xl shadow-md">
+        <div class="flex justify-between items-center">
+            <h2 class="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                <i style="font-size: 30px;" class="pi pi-users text-blue-600 "></i>
+                Enrollment
+            </h2>
             <div class="self-start sm:self-auto">
                 <p-button (onClick)="onAddEnrollment()" class="w-full sm:w-auto">
                     <i class="pi pi-plus mr-2"></i>
@@ -16,8 +14,26 @@
             </div>
         </div>
 
+        <div class="">
+            <app-filters></app-filters>
+        </div>
 
-        <p-table [value]="enrollments$ | async" class="text-sm mt-3">
+        <hr class="py-4 text-gray-200">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2 sm:gap-0">
+            <!-- Title -->
+            <!-- <h2 class="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                <i class="pi pi-users text-blue-600 text-2xl sm:text-3xl"></i>
+                Enrollment Overview
+            </h2> -->
+
+
+
+            <!-- New Enrollment Button -->
+
+        </div>
+
+
+        <p-table [value]="isFilterApplied ? filteredEnrolls : (enrollments$ | async)" class="text-sm mt-3">
             <ng-template pTemplate="header">
                 <tr>
                     <th pSortableColumn="studentName">
@@ -68,7 +84,7 @@
                         <span class="px-3 py-1 rounded-full text-white text-xs font-semibold" [ngClass]="{
               'bg-green-500': enroll.status === 'Full Paid',
               'bg-yellow-500': enroll.status === 'Partial Paid',
-              'bg-red-500': enroll.status === 'Pending'
+              'bg-red-500': enroll.status === 'Not Paid'
             }">
                             {{ enroll.status }}
                         </span>

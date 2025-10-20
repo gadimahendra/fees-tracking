@@ -17,6 +17,7 @@ import {
 import { EnrollmentDialogComponent } from '../enrollment-dialog/enrollment-dialog.component';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { FiltersComponent } from '../filters/filters.component';
 
 @Component({
   selector: 'app-enrollments',
@@ -29,6 +30,7 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     DynamicDialogModule,
     ToastModule,
+    FiltersComponent,
   ],
   templateUrl: './enrollments.component.html',
   styleUrl: './enrollments.component.scss',
@@ -37,6 +39,8 @@ import { ToastModule } from 'primeng/toast';
 export class EnrollmentsComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
   enrollments$!: Observable<any>;
+  filteredEnrolls: any = [];
+  isFilterApplied: boolean = false;
   constructor(
     private store: Store,
     private dialogService: DialogService,
@@ -46,8 +50,9 @@ export class EnrollmentsComponent implements OnInit {
   ngOnInit(): void {
     this.triggergetStore();
     this.enrollments$ = this.store.select(EnrolmentState.getEnrollmentData);
-    this.enrollments$.subscribe((res) => {
-      console.log('-----------------', res);
+    this.store.select(EnrolmentState.getFilteredData).subscribe((res) => {
+      this.filteredEnrolls = res.filteredEnrollments;
+      this.isFilterApplied = res.filterApplied;
     });
   }
 

@@ -1,0 +1,43 @@
+<!-- 🔍 Filter Section -->
+<div class="mb-6  p-4 ">
+    <div class="flex flex-col lg:flex-row justify-between gap-4">
+
+        <!-- Filter Inputs -->
+        <div class="flex flex-col lg:flex-row items-start lg:items-end flex-wrap gap-4">
+            <!-- Student Name -->
+            <div class="flex flex-col">
+                <label class="text-gray-700 text-sm font-medium mb-1">Student Name</label>
+                <input pInputText type="text" [(ngModel)]="filters.studentName" placeholder="Search by name"
+                    class="w-72 lg:w-64" />
+            </div>
+
+            <!-- Batch ID -->
+            <div class="flex flex-col">
+                <label class="text-gray-700 text-sm font-medium mb-1">Batch</label>
+                <p-dropdown [options]="batches$ | async" optionLabel="batchName" optionValue="batchId"
+                    placeholder="Select Batch" class="w-72 lg:w-64" [(ngModel)]="filters.batchId">
+                </p-dropdown>
+            </div>
+
+            <!-- Status -->
+            <div class="flex flex-col">
+                <label class="text-gray-700 text-sm font-medium mb-1">Status</label>
+                <p-dropdown [options]="statusOptions" optionLabel="label" optionValue="value"
+                    placeholder="Select Status" class="w-72 lg:w-64" [(ngModel)]="filters.status">
+                </p-dropdown>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex justify-end items-end gap-3">
+            <p-button [disabled]="filters.batchId==0&&filters.status==''&&filters.studentName==''" label="Clear"
+                icon="pi pi-times" severity="danger" (onClick)="clearFilters()">
+            </p-button>
+
+            <p-button [disabled]="filters.batchId==0&&filters.status==''&&filters.studentName==''" label="Apply Filters"
+                icon="pi pi-filter" (onClick)="applyFilters()">
+            </p-button>
+        </div>
+
+    </div>
+</div>
