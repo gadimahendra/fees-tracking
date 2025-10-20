@@ -7,7 +7,7 @@ The project is built using **Angular 19**, **NGXS**, **PrimeNG**, and **Tailwind
 
 ---
 
-## ✅ Features Implemented
+## ✅ Features Implemented So Far
 
 ### 1. View Enrollments
 
