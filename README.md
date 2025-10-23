@@ -102,8 +102,8 @@ The project is built using **Angular 19**, **NGXS**, **PrimeNG**, and **Tailwind
 1. Clone the repository:
 
 ```bash
-git clone <https://github.com/gadimahendra/fees-tracking.git>
-cd <fess-tracking>
+git clone https://github.com/gadimahendra/fees-tracking.git
+cd fees-tracking
 npm install
 ng serve
 ```
