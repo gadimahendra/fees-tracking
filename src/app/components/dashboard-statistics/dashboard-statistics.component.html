@@ -5,7 +5,7 @@
                 <div class="flex justify-between items-center">
                     <h1> Total Batches</h1>
                     <button type="button" class="text-blue-300 border-none outline-none text-sm cursor-pointer"
-                        (click)="openDialog()">View</button>
+                        (click)="displayDialog = true">View</button>
                 </div>
 
             </ng-template>
@@ -40,7 +40,7 @@
 
 
 <p-dialog [style]="{width: '90%', 'max-width': '600px'}" [closable]="true" header="Batch Details"
-    [(visible)]="displayDialog" [modal]="true" [responsive]="true" (onHide)="closeDialog()">
+    [(visible)]="displayDialog" [modal]="true" [responsive]="true" (onHide)="displayDialog = false">
 
     <p-table [value]="dashboardStatics.batchwisestats" [responsiveLayout]="'scroll'" [scrollable]="true"
         scrollHeight="500px">
