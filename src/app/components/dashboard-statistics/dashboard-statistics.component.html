@@ -11,7 +11,7 @@
             </ng-template>
             <ng-template pTemplate="content">
                 <div class="text-3xl font-bold">
-                    {{ dashboardStatics.totalbatches }}
+                    {{ dashboardStatics?.totalbatches }}
 
                 </div>
                 <div class="text-gray-500 text-sm">Academic Units</div>
@@ -22,7 +22,8 @@
         <p-card class="rounded-2xl shadow-md">
             <ng-template pTemplate="title"> Total Received </ng-template>
             <ng-template pTemplate="content">
-                <div class="text-3xl font-bold text-green-600">{{ dashboardStatics.totalreceived }}</div>
+                <div class="text-3xl font-bold text-green-600">{{ dashboardStatics?.totalreceived | currency:'INR' }}
+                </div>
                 <div class="text-gray-500 text-sm">Tuition cleared</div>
             </ng-template>
         </p-card>
@@ -31,8 +32,19 @@
         <p-card class="rounded-2xl shadow-md">
             <ng-template pTemplate="title">Total Pending</ng-template>
             <ng-template pTemplate="content">
-                <div class="text-3xl font-bold text-yellow-500">{{ dashboardStatics.totalpending }}</div>
-                <div class="text-gray-500 text-sm">Pending balances</div>
+                <div class="text-3xl font-bold text-yellow-500">{{ dashboardStatics?.totalpending | currency:'INR' }}
+                </div>
+                <div class="text-gray-500 text-sm">Outstanding Balance</div>
+            </ng-template>
+        </p-card>
+
+        <p-card class="rounded-2xl shadow-md">
+            <ng-template pTemplate="title">Total Amout to be Received </ng-template>
+            <ng-template pTemplate="content">
+                <div class="text-3xl font-bold text-red-500">{{ dashboardStatics?.totalamounttobereceived |
+                    currency:'INR' }}
+                </div>
+                <div class="text-gray-500 text-sm">Expected Receivable</div>
             </ng-template>
         </p-card>
     </div>
@@ -42,8 +54,8 @@
 <p-dialog [style]="{width: '90%', 'max-width': '600px'}" [closable]="true" header="Batch Details"
     [(visible)]="displayDialog" [modal]="true" [responsive]="true" (onHide)="displayDialog = false">
 
-    <p-table [value]="dashboardStatics.batchwisestats" [responsiveLayout]="'scroll'" [scrollable]="true"
-        scrollHeight="500px">
+    <p-table [value]="dashboardStatics ? dashboardStatics.batchwisestats: []" [responsiveLayout]="'scroll'"
+        [scrollable]="true" scrollHeight="500px">
         <ng-template pTemplate="header">
             <tr>
                 <th>Batch ID</th>

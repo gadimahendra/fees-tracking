@@ -7,10 +7,10 @@ import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
 // import { ChartModule } from 'primeng/chart';
-
+import { CurrencyPipe } from '@angular/common';
 @Component({
   selector: 'app-dashboard-statistics',
-  imports: [CardModule, DialogModule, TableModule],
+  imports: [CardModule, DialogModule, TableModule, CurrencyPipe],
   templateUrl: './dashboard-statistics.component.html',
   styleUrl: './dashboard-statistics.component.scss',
 })
