@@ -1,10 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { CardModule } from 'primeng/card';
+import { EnrolmentState } from '../../../store/states/enrollment.state';
+import { getDashboardData } from '../../../store/actions/enrollment.action';
+import { IdashboardStats } from '../../../core/model/enrollment.model';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
 // import { ChartModule } from 'primeng/chart';
 
 @Component({
   selector: 'app-dashboard-statistics',
-  imports: [CardModule],
+  imports: [CardModule, DialogModule, TableModule],
   templateUrl: './dashboard-statistics.component.html',
   styleUrl: './dashboard-statistics.component.scss',
 })
@@ -14,37 +20,30 @@ export class DashboardStatisticsComponent implements OnInit {
   fullyPaid = 820;
   partiallyPaid = 428;
 
+  displayDialog: boolean = false;
+
+  dashboardStatics!: IdashboardStats;
+
   paymentChartData: any;
   paymentChartOptions: any;
-
-  ngOnInit(): void {
-    this.setupChart();
+  private store = inject(Store);
+  ngOnInit() {
+    this.store.dispatch(new getDashboardData()).subscribe({
+      next: (res: any) => {
+        console.log('response', res);
+        this.dashboardStatics = res.enrollment.DashboardStats;
+      },
+      error: (err) => {
+        console.log('error', err);
+      },
+    });
   }
 
-  setupChart() {
-    this.paymentChartData = {
-      labels: ['Fully Paid', 'Partially Paid'],
-      datasets: [
-        {
-          label: 'Students',
-          data: [this.fullyPaid, this.partiallyPaid],
-          backgroundColor: ['#16a34a', '#eab308'],
-        },
-      ],
-    };
+  openDialog() {
+    this.displayDialog = true;
+  }
 
-    this.paymentChartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { precision: 0 },
-        },
-      },
-      plugins: {
-        legend: { display: false },
-      },
-    };
+  closeDialog() {
+    this.displayDialog = false;
   }
 }

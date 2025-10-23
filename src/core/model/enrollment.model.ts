@@ -31,3 +31,19 @@ export interface IEnrollmentFilter {
   status?: string;
   studentName?: string;
 }
+
+export interface IdashboardStats {
+  totalbatches: number;
+  totalamounttobereceived: number;
+  totalreceived: number;
+  totalpending: number;
+  batchwisestats: IbatchwiseStats[];
+}
+
+export interface IbatchwiseStats {
+  batchid: number;
+  batchname: string;
+  totalamount: number;
+  totalreceived: number;
+  totalpending: number;
+}

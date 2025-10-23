@@ -27,4 +27,10 @@ export class FessService {
       'https://api.freeprojectapi.com/api/FeesTracking/batches'
     );
   }
+
+  getDashboardData() {
+    return this.http.get(
+      'https://api.freeprojectapi.com/api/FeesTracking/GetDashboardStats'
+    );
+  }
 }

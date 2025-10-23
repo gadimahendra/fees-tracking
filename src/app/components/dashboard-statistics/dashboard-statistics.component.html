@@ -1,50 +1,67 @@
 <div class="px-4 py-2 flex flex-col ">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <p-card class="rounded-2xl shadow-md">
-            <ng-template pTemplate="title">Total Students</ng-template>
-            <ng-template pTemplate="content">
-                <div class="text-3xl font-bold">{{ totalStudents }}</div>
-                <div class="text-gray-500 text-sm">Active / Registered</div>
+            <ng-template pTemplate="title">
+                <div class="flex justify-between items-center">
+                    <h1> Total Batches</h1>
+                    <button type="button" class="text-blue-300 border-none outline-none text-sm cursor-pointer"
+                        (click)="openDialog()">View</button>
+                </div>
+
             </ng-template>
-        </p-card>
-
-
-        <p-card class="rounded-2xl shadow-md">
-            <ng-template pTemplate="title">Total Departments</ng-template>
             <ng-template pTemplate="content">
-                <div class="text-3xl font-bold">{{ totalDepartments }}</div>
+                <div class="text-3xl font-bold">
+                    {{ dashboardStatics.totalbatches }}
+
+                </div>
                 <div class="text-gray-500 text-sm">Academic Units</div>
             </ng-template>
         </p-card>
 
 
         <p-card class="rounded-2xl shadow-md">
-            <ng-template pTemplate="title">Fully Paid</ng-template>
+            <ng-template pTemplate="title"> Total Received </ng-template>
             <ng-template pTemplate="content">
-                <div class="text-3xl font-bold text-green-600">{{ fullyPaid }}</div>
+                <div class="text-3xl font-bold text-green-600">{{ dashboardStatics.totalreceived }}</div>
                 <div class="text-gray-500 text-sm">Tuition cleared</div>
             </ng-template>
         </p-card>
 
 
         <p-card class="rounded-2xl shadow-md">
-            <ng-template pTemplate="title">Partially Paid</ng-template>
+            <ng-template pTemplate="title">Total Pending</ng-template>
             <ng-template pTemplate="content">
-                <div class="text-3xl font-bold text-yellow-500">{{ partiallyPaid }}</div>
+                <div class="text-3xl font-bold text-yellow-500">{{ dashboardStatics.totalpending }}</div>
                 <div class="text-gray-500 text-sm">Pending balances</div>
             </ng-template>
         </p-card>
     </div>
-
-
-    <!-- <div class="w-full lg:w-3/4 mx-auto">
-        <p-card class="rounded-2xl shadow-md">
-            <ng-template pTemplate="title">Payments Overview</ng-template>
-            <ng-template pTemplate="content">
-                <div class="h-64">
-                    <p-chart type="bar" [data]="paymentChartData" [options]="paymentChartOptions"></p-chart>
-                </div>
-            </ng-template>
-        </p-card>
-    </div> -->
 </div>
+
+
+<p-dialog [style]="{width: '90%', 'max-width': '600px'}" [closable]="true" header="Batch Details"
+    [(visible)]="displayDialog" [modal]="true" [responsive]="true" (onHide)="closeDialog()">
+
+    <p-table [value]="dashboardStatics.batchwisestats" [responsiveLayout]="'scroll'" [scrollable]="true"
+        scrollHeight="500px">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Batch ID</th>
+                <th>Batch Name</th>
+                <th>Total Amount</th>
+                <th>Total Pending</th>
+                <th>Total Received</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+            <tr>
+                <td>{{ rowData.batchid }}</td>
+                <td>{{ rowData.batchname }}</td>
+                <td>{{ rowData.totalamount }}</td>
+                <td>{{ rowData.totalpending }}</td>
+                <td>{{ rowData.totalreceived }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-dialog>

@@ -22,3 +22,7 @@ export class GetEnrollmentsByFilter {
 export class ClearilterEnrollsFilter {
   static readonly type = '[Clear] Filters';
 }
+
+export class getDashboardData {
+  static readonly type = '[Get] Dashboard_data';
+}

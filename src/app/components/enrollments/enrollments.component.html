@@ -4,7 +4,7 @@
         <div class="flex justify-between items-center">
             <h2 class="text-xl sm:text-2xl font-bold flex items-center gap-2">
                 <i style="font-size: 30px;" class="pi pi-users text-blue-600 "></i>
-                Enrollment
+                Student Enrollment
             </h2>
             <div class="self-start sm:self-auto">
                 <p-button (onClick)="onAddEnrollment()" class="w-full sm:w-auto">
@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="">
+        <div>
             <app-filters></app-filters>
         </div>
 
@@ -36,13 +36,14 @@
         <p-table [value]="isFilterApplied ? filteredEnrolls : (enrollments$ | async)" class="text-sm mt-3">
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="studentName">
+                    <!-- <th>Id</th> -->
+                    <th>
                         Student Name
-                        <p-sortIcon field="studentName"></p-sortIcon>
+                        <!-- <p-sortIcon field="studentName"></p-sortIcon> -->
                     </th>
-                    <th pSortableColumn="batchName">
+                    <th>
                         Batch
-                        <p-sortIcon field="batchName"></p-sortIcon>
+                        <!-- <p-sortIcon field="batchName"></p-sortIcon> -->
                     </th>
                     <th>EMIs</th>
                     <th>Total Fees</th>
@@ -53,6 +54,7 @@
 
             <ng-template pTemplate="body" let-enroll>
                 <tr>
+                    <!-- <td>{{enroll.enrollId}}</td> -->
                     <td>
                         <span class="font-semibold text-gray-800">{{ enroll.studentName }}</span>
                         <span class="flex items-center text-gray-600">

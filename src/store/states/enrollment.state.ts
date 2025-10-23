@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Action, select, Selector, State, StateContext } from '@ngxs/store';
 import {
+  IbatchwiseStats,
+  IdashboardStats,
   Ienrollment,
   IEnrollmentFilter,
   IpostEnrollemt,
 } from '../../core/model/enrollment.model';
 import {
   ClearilterEnrollsFilter,
+  getDashboardData,
   GetEnrollments,
   GetEnrollmentsByFilter,
   PostEnrollment,
@@ -18,6 +21,7 @@ interface exportStateModel {
   enrollments: Ienrollment[];
   filteredEnrollments: Ienrollment[];
   filterApplied: boolean;
+  DashboardStats: IdashboardStats;
 }
 
 @State<exportStateModel>({
@@ -26,6 +30,13 @@ interface exportStateModel {
     enrollments: [],
     filteredEnrollments: [],
     filterApplied: false,
+    DashboardStats: {
+      totalbatches: 0,
+      totalamounttobereceived: 0,
+      totalreceived: 0,
+      totalpending: 0,
+      batchwisestats: [],
+    },
   },
 })
 @Injectable()
@@ -106,5 +117,12 @@ export class EnrolmentState {
       filteredEnrollments: ctx.getState().enrollments,
       filterApplied: false,
     });
+  }
+
+  @Action(getDashboardData)
+  fetchDashboardApi(ctx: StateContext<exportStateModel>) {
+    return this.service
+      .getDashboardData()
+      .pipe(tap((res: any) => ctx.patchState({ DashboardStats: res })));
   }
 }
